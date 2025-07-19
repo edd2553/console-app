@@ -7,11 +7,13 @@ interface RunOptions {
   base: number;
   limit: number;
   showTable: boolean;
+  fileName?: string;
+  destination?: string;
 }
 
 export class ServerApp {
   static async run(options: RunOptions) {
-    const { base, limit, showTable } = options;
+    const { base, limit, showTable, destination, fileName } = options;
     const headers = new CreateHeader().execute({ base });
     const table = new CreateTable().execute({ base, limit });
 
@@ -20,8 +22,8 @@ export class ServerApp {
     const fileManager = new SaveFile(fileSystemRepo);
     const isFileCreated = fileManager.execute({
       fileContent: content,
-      destination: 'outputs',
-      fileName: `tabla-${base}.txt`,
+      destination,
+      fileName,
     });
 
     if (showTable)
@@ -29,7 +31,7 @@ export class ServerApp {
       `);
 
     if (isFileCreated) {
-      console.log(`File created: outputs/tabla-${base}.txt`);
+      console.log(`File created: ${destination}/${fileName}`);
     } else {
       console.error('Error creating the file.');
     }
