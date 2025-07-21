@@ -1,0 +1,25 @@
+# 🧮 CLI Application in Node.js
+
+---
+
+This is a simple CLI (Command Line Interface) application for generating multiplication tables. It was built using **argument values** from `process.argv` — the parameters and options passed through the terminal.
+We used file system to writhe the tables in a file.
+
+The application demonstrates:
+
+- 📦 Use of the `yargs` package to manage command-line flags and options
+- 📁 Writing generated tables to a file using Node.js' built-in `fs` (File System) module
+- 🧠 Application of **Use Case Principles** from **Clean Architecture**
+
+This project is a practical exercise to deepen understanding of core **Node.js** features and command-line tooling.
+
+
+---
+
+## Concepts:
+
+- use cases: 
+    - Summarizes all business logic of the application
+    - Separation of concerns
+    - Built the table
+    - Save file in file system without taking care of where to save the multiplication table
