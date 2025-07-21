@@ -24,7 +24,6 @@ export const yarg = yargs(hideBin(process.argv))
     alias: 'name',
     type: 'string',
     description: 'Name of the output file',
-    default: 'multiplication-table',
   })
   .option('d', {
     alias: 'destination',

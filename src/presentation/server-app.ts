@@ -23,7 +23,7 @@ export class ServerApp {
     const isFileCreated = fileManager.execute({
       fileContent: content,
       destination,
-      fileName,
+      fileName: fileName || `multiplication-table-${base}.txt`,
     });
 
     if (showTable)
