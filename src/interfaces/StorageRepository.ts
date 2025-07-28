@@ -1,9 +1,13 @@
-export interface StorageRepository {
-  mkdirSync: (folderPath: string) => boolean;
-  writeFileSync: ({ path, content }: WriteFileOptions) => boolean;
+export interface SafeFileOptions {
+  fileContent: string;
+  folderPath?: string;
+  fileName?: string;
 }
 
-export interface WriteFileOptions {
-  path: string;
-  content: string;
+export interface StorageRepository {
+  saveFileSync: ({
+    fileContent,
+    fileName,
+    folderPath
+  }: SafeFileOptions) => boolean;
 }

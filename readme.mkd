@@ -16,10 +16,14 @@ This project is a practical exercise to deepen understanding of core **Node.js**
 
 ---
 
-## Concepts:
+## Concepts and some thoughts:
 
-- use cases: 
+- use cases: From clean code principles,  
     - Summarizes all business logic of the application
-    - Separation of concerns
-    - Built the table
-    - Save file in file system without taking care of where to save the multiplication table
+    - Give us Separation of concerns
+    - When Saving the file we may want to be agnostic about where to save the multiplication table, it
+      can be save file, and it can recibe an instance that tells us where to save the file, with that implementation
+
+- Auto invoke asynchronous function
+- Testing: Always start from the smallest component to the biggest
+- Spy on: Observe and track the behavior of functions or methods without altering their original implementation

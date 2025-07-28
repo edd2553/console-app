@@ -1,9 +1,9 @@
 import { CreateHeader } from '../domain/use-cases/createHeader';
-import { CreateTable } from '../domain/use-cases/createTable';
-import { SaveFile } from '../domain/use-cases/safeFile';
-import { fileSystemRepo } from '../repository/fileSystem';
+import { CreateTable } from '../domain/use-cases/createTable/createTable';
+import { SaveFile } from '../domain/use-cases/saveFile/saveFile';
+import { fileSystemRepo } from '../architecture/fileSystem';
 
-interface RunOptions {
+export interface RunOptions {
   base: number;
   limit: number;
   showTable: boolean;
@@ -12,26 +12,32 @@ interface RunOptions {
 }
 
 export class ServerApp {
-  static async run(options: RunOptions) {
-    const { base, limit, showTable, destination, fileName } = options;
+  static async run({
+    base,
+    limit,
+    showTable,
+    destination: folderPath,
+    fileName = `multiplication-table-${base}.txt`,
+  }: RunOptions) {
+
+    console.log('Server running...')
+
     const headers = new CreateHeader().execute({ base });
     const table = new CreateTable().execute({ base, limit });
-
-    const content = `${headers}  \n${table}`;
-
     const fileManager = new SaveFile(fileSystemRepo);
+
+    const fileContent = `${headers}  \n${table}`;
+
     const isFileCreated = fileManager.execute({
-      fileContent: content,
-      destination,
-      fileName: fileName || `multiplication-table-${base}.txt`,
+      fileContent,
+      folderPath,
+      fileName,
     });
 
-    if (showTable)
-      console.log(`${headers}  \n${table}
-      `);
+    if (showTable) console.log(fileContent);
 
     if (isFileCreated) {
-      console.log(`File created: ${destination}/${fileName}`);
+      console.log(`File created: ${folderPath}/${fileName}`);
     } else {
       console.error('Error creating the file.');
     }

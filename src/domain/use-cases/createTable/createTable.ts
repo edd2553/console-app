@@ -1,6 +1,6 @@
 export interface ExecuteProps {
   base: number;
-  limit: number;
+  limit?: number;
 }
 
 export interface CreateTableUseCase {
@@ -12,12 +12,14 @@ export class CreateTable implements CreateTableUseCase {
    * DI - Dependency injection
    */ {}
 
-  execute({ base, limit }: ExecuteProps): string {
+  execute({ base, limit = 10 }: ExecuteProps): string {
     let output = '';
 
     for (let i = 1; i <= limit; i++) {
       const result = base * i;
-      output += `${base} x ${i} = ${result} \n`;
+      output += `${base} x ${i} = ${result}`;
+
+      if (i < limit) output += '\n';
     }
 
     return output;
